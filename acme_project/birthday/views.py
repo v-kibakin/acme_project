@@ -9,4 +9,3 @@ def birthday(request):
         pass
     context = {'form': form}
     return render(request, 'birthday/birthday.html', context)
-
