@@ -7,4 +7,7 @@
     </p>
     <input type="submit" value="Submit">
   </form>
-{% endblock %}
+  {% if request.GET %}
+    <h2> Привет, {{request.GET.first_name}} {{request.GET.last_name}}
+  {% endif %}
+ {% endblock %}

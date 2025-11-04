@@ -4,6 +4,7 @@ from .forms import BirthdayForm
 
 
 def birthday(request):
+    print(request.GET)
     # Создаём экземпляр класса формы.
     form = BirthdayForm()
     # Добавляем его в словарь контекста под ключом form:
