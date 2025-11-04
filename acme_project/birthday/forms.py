@@ -13,5 +13,6 @@ class BirthdayForm(forms.Form):
         help_text='Необязательное поле'
     )
     birthday = forms.DateField(
-        label='Дата рождения'
+        label='Дата рождения',
+        widget=forms.DateInput(attrs={'type': 'date'})
     )
