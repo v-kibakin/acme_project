@@ -4,10 +4,9 @@ from .forms import BirthdayForm
 
 
 def birthday(request):
-    print(request.GET)
-    # Создаём экземпляр класса формы.
-    form = BirthdayForm()
-    # Добавляем его в словарь контекста под ключом form:
+    form = BirthdayForm(request.GET or None)
+    if form.is_valid():
+        pass
     context = {'form': form}
-    # Указываем нужный шаблон и передаём в него словарь контекста.
     return render(request, 'birthday/birthday.html', context)
+
