@@ -13,7 +13,7 @@ class Birthday(models.Model):
     class Meta:
         constraints = (
             models.UniqueConstraint(
-                flields=('first_name', 'last_name', 'birthday'),
-                name='Unique person constraint'
-            )
+                fields=('first_name', 'last_name', 'birthday'),
+                name='Unique person constraint',
+            ),
         )
