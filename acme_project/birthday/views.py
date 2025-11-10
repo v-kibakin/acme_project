@@ -17,7 +17,6 @@ class BirthdayListView(ListView):
 
 class BirthdayMixin:
     model = Birthday
-    success_url = reverse_lazy('birthday:list')
 
 
 class BirthdayCreateView(BirthdayMixin, CreateView):
