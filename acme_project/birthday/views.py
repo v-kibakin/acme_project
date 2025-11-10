@@ -1,6 +1,5 @@
 # birthday/views.py
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+from django.views.generic import CreateView, DetailView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy
 
 from .forms import BirthdayForm
@@ -39,3 +38,7 @@ class BirthdayListView(ListView):
     ordering = 'id'
     # ...и даже настройки пагинации:
     paginate_by = 10
+
+
+class BirthdayDetailView(DetailView):
+    model = Birthday
