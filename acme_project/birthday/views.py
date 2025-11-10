@@ -1,7 +1,7 @@
 # birthday/views.py
 from django.shortcuts import render, redirect, get_object_or_404
-from django.core.paginator import Paginator
-from django.views.generic import ListView
+from django.views.generic import CreateView, ListView
+from django.urls import reverse_lazy
 
 from .forms import BirthdayForm
 from .models import Birthday
@@ -37,6 +37,14 @@ def birthday(request, pk=None):
         )
         context.update({'birthday_countdown': birthday_countdown})
     return render(request, 'birthday/birthday.html', context)
+
+
+class BirthdayCreateView(CreateView):
+    model = Birthday
+    # Указываем имя формы:
+    form_class = BirthdayForm
+    template_name = 'birthday/birthday.html'
+    success_url = reverse_lazy('birthday:list')
 
 
 # Наследуем класс от встроенного ListView:
