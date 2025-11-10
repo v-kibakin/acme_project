@@ -1,6 +1,6 @@
 # birthday/views.py
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from django.urls import reverse_lazy
 
 from .forms import BirthdayForm
@@ -28,6 +28,11 @@ class BirthdayUpdateView(BirthdayMixin, UpdateView):
     pass
 
 
+class BirthdayDeleteView(DeleteView):
+    model = Birthday
+    success_url = reverse_lazy('birthday:list')
+
+
 # Наследуем класс от встроенного ListView:
 class BirthdayListView(ListView):
     # Указываем модель, с которой работает CBV...
@@ -36,20 +41,3 @@ class BirthdayListView(ListView):
     ordering = 'id'
     # ...и даже настройки пагинации:
     paginate_by = 10
-
-
-def delete_birthday(request, pk):
-    # Получаем объект модели или выбрасываем 404 ошибку.
-    instance = get_object_or_404(Birthday, pk=pk)
-    # В форму передаём только объект модели;
-    # передавать в форму параметры запроса не нужно.
-    form = BirthdayForm(instance=instance)
-    context = {'form': form}
-    # Если был получен POST-запрос...
-    if request.method == 'POST':
-        # ...удаляем объект:
-        instance.delete()
-        # ...и переадресовываем пользователя на страницу со списком записей.
-        return redirect('birthday:list')
-    # Если был получен GET-запрос — отображаем форму.
-    return render(request, 'birthday/birthday.html', context)
