@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def homepage(request):
-    return render(request, 'pages/index.html')
+class HomePage(TemplateView):
+    # В атрибуте template_name обязательно указывается имя шаблона,
+    # на основе которого будет создана возвращаемая страница.
+    template_name = 'pages/index.html'
