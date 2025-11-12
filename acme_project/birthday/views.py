@@ -2,13 +2,13 @@
 from django.views.generic import (
     CreateView, DeleteView, DetailView, ListView, UpdateView
 )
-from django.urls import reverse_lazy
 
 from .forms import BirthdayForm
 from .models import Birthday
 from .utils import calculate_birthday_countdown
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 @login_required
@@ -26,7 +26,7 @@ class BirthdayMixin:
     model = Birthday
 
 
-class BirthdayCreateView(BirthdayMixin, CreateView):
+class BirthdayCreateView(LoginRequiredMixin, BirthdayMixin, CreateView):
     form_class = BirthdayForm
 
 
