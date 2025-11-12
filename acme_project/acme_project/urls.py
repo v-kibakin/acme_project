@@ -7,6 +7,8 @@ from django.views.generic.edit import CreateView
 from django.urls import include, path, reverse_lazy
 
 
+handler404 = 'core.views.page_not_found'
+
 urlpatterns = [
     path('', include('pages.urls')),
     path('admin/', admin.site.urls),
@@ -20,5 +22,5 @@ urlpatterns = [
             success_url=reverse_lazy('pages:homepage'),
         ),
         name='registration',
-    )
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
