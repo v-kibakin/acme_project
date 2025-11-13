@@ -22,6 +22,8 @@ class OnlyAuthorMixin(UserPassesTestMixin):
 
 class BirthdayListView(ListView):
     model = Birthday
+
+    queryset = Birthday.objects.prefetch_related('tags')
     ordering = 'id'
     paginate_by = 10
 
