@@ -6,7 +6,6 @@ from django.views.generic.edit import CreateView
 # К импортам из django.urls добавьте импорт функции reverse_lazy
 from django.urls import include, path, reverse_lazy
 
-
 handler404 = 'core.views.page_not_found'
 
 urlpatterns = [
@@ -23,4 +22,14 @@ urlpatterns = [
         ),
         name='registration',
     ),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+# Debug toolbar только в режиме DEBUG
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+
+    # Обработка медиафайлов
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
